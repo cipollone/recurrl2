@@ -9,6 +9,7 @@ python = "^3.8"
 ray = {extras = ["default", "rllib", "tune"], version = "^1.4.1"}
 tensorflow = "^2.5.0"
 nonmarkov-envs = { git = "ssh://git@github.com/whitemech/nonmarkov-envs.git", branch = "multidiscrete" }
+GPUtil = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.22.0"

@@ -5,7 +5,7 @@ from functools import partial
 import importlib
 
 from gym import Env, ObservationWrapper, RewardWrapper, Wrapper
-from gym.spaces import Box, Discrete, MultiDiscrete
+from gym.spaces import Discrete, MultiDiscrete
 from nonmarkov_envs.discrete_env import MultiDiscreteEnv
 from nonmarkov_envs.rdp_env import RDPEnv as RDPEnv0
 from nonmarkov_envs.specs import driving_agent

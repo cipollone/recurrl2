@@ -1,5 +1,5 @@
 # About this experiment
-name: cheat-mab-0
+name: cheat-mab-1
 comment: A3C with LSTM
 
 # About the algorithm
@@ -13,16 +13,22 @@ algorithm:
   params:
     agent: IMPALA
     config:
-      num_workers: 5
-      num_envs_per_worker: 1
-      num_gpus: 0
-      rollout_fragment_length: 50
-      train_batch_size: 500
+      num_workers: 10
+      num_envs_per_worker: 2
+      num_gpus: 1
+      rollout_fragment_length: 20
+      train_batch_size: 60
       batch_mode: truncate_episodes
       opt_type: adam
-      lr: 0.0005
+      lr: 0.002
       gamma: 0.98
       framework: tf
+      model:
+        fcnet_hiddens: [32]
+        fcnet_activation: tanh
+        use_lstm: true
+        max_seq_len: 20
+        lstm_cell_size: 32
 
 # About the environment
 environment:

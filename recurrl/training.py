@@ -1,10 +1,12 @@
 """Training main file."""
 
 import yaml
+import random
 
 import ray
+import numpy as np
+import tensorflow as tf
 from ray import tune
-from ray.rllib.agents.impala import ImpalaTrainer
 
 from .envs import NonMarkovEnvs
 
@@ -39,14 +41,18 @@ class Trainer:
                 spec=env_params["params"]["spec"],
                 rdp=env_params["params"]["rdp"],
             ),
-            seed=20358179,  # TODO
         )
+
+        # Set seed
+        seed = params["seed"]
+        random.seed(seed)
+        np.random.seed(seed)  # type: ignore
+        tf.random.set_seed(seed)
+        self.agent_conf["seed"] = seed
+        self.agent_conf["env_config"]["seed"] = seed
 
         # Init library
         ray.init()
-
-        # Set seed
-        # TODO
 
     def train(self):
         """Start training."""

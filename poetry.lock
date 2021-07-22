@@ -400,6 +400,14 @@ six = ">=1.7"
 test = ["mock (>=2.0.0)", "pytest (<5.0)"]
 
 [[package]]
+name = "gputil"
+version = "1.4.0"
+description = "GPUtil is a Python module for getting the GPU status from NVIDA GPUs using nvidia-smi."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "graphviz"
 version = "0.16"
 description = "Simple Python interface for Graphviz"
@@ -1464,7 +1472,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f242656f631260680c5bd4e6203780dabc67d6218d7e9c709e1660890e4711ee"
+content-hash = "d30a6c798cb0e4f03af9321de772bd8c2a2b78e508889189bc6ee77ff65a5f53"
 
 [metadata.files]
 absl-py = [
@@ -1656,6 +1664,9 @@ googleapis-common-protos = [
 ]
 gpustat = [
     {file = "gpustat-0.6.0.tar.gz", hash = "sha256:f69135080b2668b662822633312c2180002c10111597af9631bb02e042755b6c"},
+]
+gputil = [
+    {file = "GPUtil-1.4.0.tar.gz", hash = "sha256:099e52c65e512cdfa8c8763fca67f5a5c2afb63469602d5dcb4d296b3661efb9"},
 ]
 graphviz = [
     {file = "graphviz-0.16-py2.py3-none-any.whl", hash = "sha256:3cad5517c961090dfc679df6402a57de62d97703e2880a1a46147bb0dc1639eb"},
