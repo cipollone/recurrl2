@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "python-template"
+name = "recurrl"
 version = "0.1.0"
-description = "A template for Python projects"
+description = "Reinforcement Learning with RNNs"
 authors = ["Roberto Cipollone <cipollone.rt@gmail.com>"]
 
 [tool.poetry.dependencies]
