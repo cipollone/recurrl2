@@ -2,6 +2,12 @@
 
 import yaml
 
+import ray
+from ray import tune
+from ray.rllib.agents.impala import ImpalaTrainer
+
+from .envs import NonMarkovEnvs
+
 
 class Trainer:
     """Training class."""
@@ -18,16 +24,35 @@ class Trainer:
             params = yaml.safe_load(f)
         env_params = params["environment"]
         alg_params = params["algorithm"]
+        self.logs_dir = params["logs-dir"]
+        self.models_dir = params["model-dir"]
 
-        # Make environment spec
-        # TODO
+        # Trainer config
+        self.agent_type: str = alg_params["params"]["agent"]
+        self.agent_conf: dict = alg_params["params"]["config"]
+
+        # Env config
+        self.agent_conf["env"] = NonMarkovEnvs
+        self.agent_conf["env_config"] = dict(
+            name=env_params["name"],
+            params=dict(
+                spec=env_params["params"]["spec"],
+                rdp=env_params["params"]["rdp"],
+            ),
+            seed=20358179,  # TODO
+        )
+
+        # Init library
+        ray.init()
 
         # Set seed
         # TODO
 
-        # Trainer settings
-        # TODO
-
     def train(self):
         """Start training."""
-        # TODO
+        # Start via Tune
+        tune.run(
+            self.agent_type,
+            config=self.agent_conf,
+            local_dir=self.logs_dir,
+        )

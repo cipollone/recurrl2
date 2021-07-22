@@ -4,7 +4,6 @@ from typing import cast
 from functools import partial
 import importlib
 
-from escape_room1.env import EscapeRoom1
 from gym import Env, ObservationWrapper, RewardWrapper, Wrapper
 from gym.spaces import Box, Discrete, MultiDiscrete
 from nonmarkov_envs.discrete_env import MultiDiscreteEnv
@@ -18,15 +17,17 @@ EnvSpecT = driving_agent.DrivingAgent  # Or any other env spec
 class NonMarkovEnvs(Wrapper):
     """A wrapper class for all NonMarkovian environments."""
 
-    def __init__(self, name: str, params: dict, seed: int):
+    def __init__(self, config: dict):
         """Initialize.
 
-        :param name: the name of a whitemech/nonmarkov-envs environment.
-        :param params: a dictionary of additional parameters with format:
-            { "spec": dict(), "rdp": dict }
-        :param seed: seed to set for the gym environment.
+        :param config: a specification dictionary with fields:
+            name: the name of a whitemech/nonmarkov-envs environment.
+            spec: a rdp specification (see nonmarkov_envs)
+            rdp: rdp options (see nonmarkov_envs)
+            seed: environment seed.
+        :return: a gym environment
         """
-        env = _build_nonmarkov_env(name, params, seed)
+        env = _build_nonmarkov_env(config["name"], config["params"], config["seed"])
         super().__init__(env=env)
 
 
@@ -158,23 +159,3 @@ class RewardScale(RewardWrapper):
     def reward(self, reward):
         """Scale reward."""
         return reward * self._scale
-
-
-class EscapeRoom1Env(ObservationWrapper):
-    """Observations become floats."""
-
-    def __init__(self):
-        """Initialize."""
-        # Original env
-        env = EscapeRoom1()
-        super().__init__(env)
-
-        # New space
-        self.observation_space = Box(
-            low=np.array([0.0, 0.0, 0.0]),
-            high=np.array(env.observation_space.nvec),
-        )
-
-    def observation(self, observation):
-        """Transform to scalar."""
-        return observation.astype(np.float32)

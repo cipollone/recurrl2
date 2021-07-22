@@ -6,7 +6,7 @@ authors = ["Roberto Cipollone <cipollone.rt@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-ray = {extras = ["rllib"], version = "^1.4.1"}
+ray = {extras = ["default", "rllib", "tune"], version = "^1.4.1"}
 tensorflow = "^2.5.0"
 nonmarkov-envs = { git = "ssh://git@github.com/whitemech/nonmarkov-envs.git", branch = "multidiscrete" }
 

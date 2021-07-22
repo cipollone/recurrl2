@@ -10,7 +10,19 @@ algorithm:
   diff: null
   name: recurrl
 
-  params: {}
+  params:
+    agent: IMPALA
+    config:
+      num_workers: 5
+      num_envs_per_worker: 1
+      num_gpus: 0
+      rollout_fragment_length: 50
+      train_batch_size: 500
+      batch_mode: truncate_episodes
+      opt_type: adam
+      lr: 0.0005
+      gamma: 0.98
+      framework: tf
 
 # About the environment
 environment:
@@ -29,7 +41,6 @@ environment:
     rdp:
       markovian: false
       episode_length: 10
-    max_episode_timesteps: 10
 
 # Periodic evaluation
 evaluation:
