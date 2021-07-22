@@ -1,0 +1,43 @@
+# About this experiment
+name: cheat-mab-0
+comment: A3C with LSTM
+
+# About the algorithm
+algorithm:
+  repository: https://github.com/cipollone/recurrl2.git
+  version: null
+  commit: null
+  diff: null
+  name: recurrl
+
+  params: {}
+
+# About the environment
+environment:
+  name: cheat_mab
+  repository: https://github.com/whitemech/nonmarkov-envs.git
+  version: 0.2.3
+  commit: 6c8b98a
+  diff: ''
+
+  params:
+    spec: 
+      nb_arms: 2
+      win_probs: [0.2, 0.2]
+      cheat_sequence: [0, 0, 0, 1]
+      reward_win: 1.0
+    rdp:
+      markovian: false
+      episode_length: 10
+    max_episode_timesteps: 10
+
+# Periodic evaluation
+evaluation:
+  episodes: 50
+  frequency: 10000
+
+
+# How to execute
+n-runs: 1
+run-command: poetry run python -m recurrl train
+output-base: outputs
