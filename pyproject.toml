@@ -8,6 +8,7 @@ authors = ["Roberto Cipollone <cipollone.rt@gmail.com>"]
 python = "^3.8"
 GPUtil = "^1.4.0"
 ray = {extras = ["default", "rllib", "tune"], version = "^1.4.1"}
+aioredis = "<2.0.0"
 tensorflow = "^2.5.0"
 nonmarkov-envs = { git = "ssh://git@github.com/whitemech/nonmarkov-envs.git", branch = "multidiscrete" }
 escape-room1 = { git = "ssh://git@github.com/cipollone/escape-room1.git" }

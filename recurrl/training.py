@@ -7,6 +7,7 @@ import ray
 import numpy as np
 import tensorflow as tf
 from ray import tune
+from ray.tune.logger import UnifiedLogger
 
 from .envs import NonMarkovEnvs
 
@@ -64,6 +65,7 @@ class Trainer:
             self.agent_type,
             config=self.agent_conf,
             local_dir=self.logs_dir,
+            loggers=[UnifiedLogger],
             name="experiment",
             **self.alg_params["params"]["run"],
         )

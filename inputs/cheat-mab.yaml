@@ -1,5 +1,5 @@
 # About this experiment
-name: cheat-mab-0
+name: cheat-mab-2
 comment: A3C with LSTM
 
 # About the algorithm
@@ -16,26 +16,25 @@ algorithm:
       num_workers: 10
       num_envs_per_worker: 1
       num_gpus: 1
-      rollout_fragment_length: 20
+      rollout_fragment_length: 10
       train_batch_size: null
       batch_mode: truncate_episodes
       opt_type: adam
-      lr: null
+      lr: 0.002
       gamma: 0.98
       framework: tf
       model:
         fcnet_hiddens: [32]
         fcnet_activation: tanh
         use_lstm: true
-        max_seq_len: 20
+        max_seq_len: 10
         lstm_cell_size: 32
     run:
       stop:
-        episodes_total: 60000
+        episodes_total: 50000
       num_samples: 1
     tune:
-      lr: [0.001]
-      train_batch_size: [20, 40]
+      train_batch_size: [40]
 
 # About the environment
 environment:
