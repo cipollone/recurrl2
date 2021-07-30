@@ -6,10 +6,11 @@ authors = ["Roberto Cipollone <cipollone.rt@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+GPUtil = "^1.4.0"
 ray = {extras = ["default", "rllib", "tune"], version = "^1.4.1"}
 tensorflow = "^2.5.0"
 nonmarkov-envs = { git = "ssh://git@github.com/whitemech/nonmarkov-envs.git", branch = "multidiscrete" }
-GPUtil = "^1.4.0"
+escape-room1 = { git = "ssh://git@github.com/cipollone/escape-room1.git" }
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.22.0"

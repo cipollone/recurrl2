@@ -17,7 +17,7 @@ algorithm:
       num_envs_per_worker: 1
       num_gpus: 1
       rollout_fragment_length: 20
-      train_batch_size: 30
+      train_batch_size: null
       batch_mode: truncate_episodes
       opt_type: adam
       lr: null
@@ -31,10 +31,11 @@ algorithm:
         lstm_cell_size: 32
     run:
       stop:
-        episodes_total: 100000
-      num_samples: 5
+        episodes_total: 60000
+      num_samples: 1
     tune:
       lr: [0.001]
+      train_batch_size: [20, 40]
 
 # About the environment
 environment:
