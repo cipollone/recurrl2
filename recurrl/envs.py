@@ -1,17 +1,34 @@
 """Definitions of Gym environments."""
 
-from typing import cast
 from functools import partial
 import importlib
+from typing import cast
 
+from escape_room1.env import EscapeRoom1
 from gym import Env, ObservationWrapper, RewardWrapper, Wrapper
 from gym.spaces import Discrete, MultiDiscrete
 from nonmarkov_envs.discrete_env import MultiDiscreteEnv
 from nonmarkov_envs.rdp_env import RDPEnv as RDPEnv0
 from nonmarkov_envs.specs import driving_agent
 import numpy as np
+import gym.wrappers
+import gym
 
 EnvSpecT = driving_agent.DrivingAgent  # Or any other env spec
+
+
+class EscapeRoom(gym.Wrapper):
+    """Wrap EscapeRoom1.
+
+    Follow the interfact with the input config and other minor settings.
+    """
+
+    def __init__(self, config: dict):
+        """Initialize."""
+        env = EscapeRoom1()
+        env = gym.wrappers.TimeLimit(env, config["max_episode_steps"])
+
+        super().__init__(env)
 
 
 class NonMarkovEnvs(Wrapper):

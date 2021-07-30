@@ -1,5 +1,5 @@
 # About this experiment
-name: cheat-mab-0
+name: escape-room1-0
 comment: IMPALA with LSTM
 
 # About the algorithm
@@ -16,7 +16,7 @@ algorithm:
       num_workers: 10
       num_envs_per_worker: 1
       num_gpus: 1
-      rollout_fragment_length: 10
+      rollout_fragment_length: 40
       train_batch_size: null
       batch_mode: truncate_episodes
       opt_type: adam
@@ -27,7 +27,7 @@ algorithm:
         fcnet_hiddens: [32]
         fcnet_activation: tanh
         use_lstm: true
-        max_seq_len: 10
+        max_seq_len: 20
         lstm_cell_size: 32
     run:
       stop:
@@ -38,22 +38,14 @@ algorithm:
 
 # About the environment
 environment:
-  name: nonmarkov-envs
-  repository: https://github.com/whitemech/nonmarkov-envs.git
-  version: 0.2.3
-  commit: 6c8b98a
+  name: escape-room1
+  repository: https://github.com/cipollone/escape-room1.git
+  version: 0.1.0
+  commit: ab13ba2
   diff: ''
 
   params:
-    name: cheat_mab
-    spec: 
-      nb_arms: 2
-      win_probs: [0.2, 0.2]
-      cheat_sequence: [0, 0, 0, 1]
-      reward_win: 1.0
-    rdp:
-      markovian: false
-      episode_length: 10
+    max_episode_steps: 80
 
 # Periodic evaluation
 evaluation:

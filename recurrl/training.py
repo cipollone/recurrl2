@@ -1,15 +1,15 @@
 """Training main file."""
 
-import yaml
 import random
 
-import ray
 import numpy as np
-import tensorflow as tf
+import ray
 from ray import tune
 from ray.tune.logger import UnifiedLogger
+import tensorflow as tf
+import yaml
 
-from .envs import NonMarkovEnvs
+from .envs import EscapeRoom, NonMarkovEnvs
 
 
 class Trainer:
@@ -37,15 +37,21 @@ class Trainer:
         # Add choices to the configuration (see with_grid_search docstring)
         with_grid_search(self.agent_conf, self.alg_params["params"]["tune"])
 
-        # Env config
-        self.agent_conf["env"] = NonMarkovEnvs
-        self.agent_conf["env_config"] = dict(
-            name=self.env_params["name"],
-            params=dict(
-                spec=self.env_params["params"]["spec"],
-                rdp=self.env_params["params"]["rdp"],
-            ),
-        )
+        # Env configs
+        if self.env_params["name"] == "nonmarkov-envs":
+            self.agent_conf["env"] = NonMarkovEnvs
+            self.agent_conf["env_config"] = dict(
+                name=self.env_params["params"]["name"],
+                params=dict(
+                    spec=self.env_params["params"]["spec"],
+                    rdp=self.env_params["params"]["rdp"],
+                ),
+            )
+        elif self.env_params["name"] == "escape-room1":
+            self.agent_conf["env"] = EscapeRoom
+            self.agent_conf["env_config"] = self.env_params["params"]
+        else:
+            raise ValueError(f"{self.env_params['name']} is not an environment")
 
         # Set seed
         seed = params["seed"]
